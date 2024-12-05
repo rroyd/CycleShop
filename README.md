@@ -1,7 +1,7 @@
 # [CycleShop] - Marketplace for Used Products  
 
 a full-stack web application designed to create an intuitive and efficient marketplace for buying and selling second-hand products. This platform is built with a strong focus on usability, performance, and sustainability, encouraging the reuse of products while delivering a smooth e-commerce experience.
----
+
 
 ## Features  
 - **Buy and Sell**: Users can list their used products for sale or browse items available for purchase.  
