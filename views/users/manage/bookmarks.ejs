@@ -1,0 +1,18 @@
+<section class="container grid my-5 ">
+  <div class="row container mb-3">
+    <h1 class="bold border-left">Bookmarks</h1>
+    <p>Store and seek your favorite listings in here.</p>
+  </div>
+
+  <div class="row">
+    <% if (bookmarks.length) { %>
+    <section class="listings-header gap-5 mx-5 col">
+      <% bookmarks.forEach(bookmark => { %>
+      <%- include('./../../listings/listing', {listing: bookmark}) %>
+      <% }) %>
+    </section>
+    <% } else {%>
+    <h4>No bookmarks found yet. <a href="/listings" class="green underline">Discover listings</a></h4>
+    <% } %>
+  </div>
+</section>

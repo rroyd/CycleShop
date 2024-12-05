@@ -1,0 +1,19 @@
+<% if (success.length) { %>
+<div class="container mt-4 col-6">
+  <div class="alert alert-success" role="alert">
+    <strong><%= success  %></strong>
+  </div>
+</div>
+<% } else if (error.length) {%>
+<div class="container mt-4 col-6">
+  <div class="alert alert-danger" role="alert">
+    <strong><%= error  %></strong>
+  </div>
+</div>
+<% } else if (info.length) {%>
+<div class="container mt-4 col-6">
+  <div class="alert alert-info" role="alert">
+    <strong><%= info %></strong>
+  </div>
+</div>
+<% } %>

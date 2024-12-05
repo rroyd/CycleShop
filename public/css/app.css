@@ -1,0 +1,276 @@
+body {
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    overflow-x: hidden;
+}
+
+h6, p {
+    font-weight: 400;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+
+
+footer {
+    min-height: 20vh;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: rgb(191, 255, 154);
+}
+
+#main {
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+    min-height: 100vh;
+}
+
+.navbar-icon {
+    width: 20px;
+}
+
+.green {
+    color: rgb(0, 139, 25);
+}
+
+.green-light, .active {
+    color: rgb(177, 255, 177);
+}
+
+.green-medium {
+    color: rgb(85, 255, 85);
+}
+
+.green-dark {
+    color: rgb(0, 135, 0);
+}
+
+.alert-danger {
+    border-radius: 0;
+    border: 0;
+}
+
+.listings {
+    min-height: 100vh;
+}
+
+.gradient {
+    background: rgb(204,255,145);
+background: linear-gradient(90deg, rgba(204,255,145,1) 0%, rgba(234,255,210,1) 7%, rgba(255,255,255,1) 32%);
+}
+
+.preview img {
+    width: 50px;
+}
+
+.preview li {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+.filters {
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: 0.5s;
+    background-color: rgba(39, 122, 0, 0.652);
+    display: grid;
+    grid-template-columns: repeat(minmax(auto-fit, 6), minmax(50px,1fr));
+    grid-template-rows: repeat(auto-fit, minmax(100px,1fr));
+    grid-auto-flow: minmax(100px,1fr) / minmax(50px,1fr);
+
+    grid-template-areas: "a a a a"
+                         "a a a a"
+                         "b b c c"
+                         "b b c c"
+                         "b b d d"
+                         "b b d d"
+                         "e e d d"
+                         "e e d d"
+                         "f f f f"
+                         "f f f f"
+                         ". . . h";
+
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 1;
+}
+
+
+.rounded-corners {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+
+.add-filters {
+    grid-area: a;
+}
+
+.location {
+    grid-area: b;
+}
+
+.condition {
+    grid-area: c;
+}
+
+.category {
+    grid-area: d;
+}
+
+.brand {
+    grid-area: e;
+}
+
+.price-range {
+    grid-area: f;
+}
+
+.apply {
+    grid-area: h;
+}
+
+.border-left {
+    border-right: 15px solid rgb(0, 135, 0);
+}
+
+.border-right { 
+    border-left: 15px solid rgb(0, 135, 0);
+}
+
+.curved {
+    border-bottom-right-radius: 20px;
+}
+
+
+.listings-header {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(50px,1fr));
+    grid-template-rows: repeat(20, minmax(100px,1fr));
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: cover;
+}
+
+.card {
+    border: 0;
+}
+
+.price {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.listing-card {
+    grid-column: auto / 2 span;
+    grid-row: span 1 / span 4;
+}
+
+.listing-main {
+    background-color: white;
+    border: 1px rgb(213, 213, 213) solid;
+}
+
+.secondary {
+    background-color: rgb(230, 230, 230);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.hide {
+    transform: scaleX(0);
+}
+
+#spacing {
+    height: 70px;
+}
+
+
+#arrow,
+#arrow::before {
+    background-color: rgba(22, 147, 0, 0.47);
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+}
+
+#arrow {
+  visibility: hidden;
+}
+
+#arrow::before {
+  visibility: visible;
+  content: '';
+  transform: rotate(45deg);
+}
+
+.filters[data-popper-placement^='top'] > #arrow {
+    bottom: -4px;
+  }
+  
+.filters[data-popper-placement^='bottom'] > #arrow {
+    top: -4px;
+  }
+  
+.filters[data-popper-placement^='left'] > #arrow {
+    right: -4px;
+  }
+  
+.filters[data-popper-placement^='right'] > #arrow {
+    left: -4px;
+  }
+
+.filters {
+    display: none;
+}
+
+.filters[data-show] {
+    display: grid;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.ratings {
+    transform: scale(1.3);
+    transform-origin: left;
+}
+
+.btn-star {
+    padding: 0;
+    margin: 0;
+}
+
+.manage {
+    min-height: 100vh;
+}
+
+.noti {
+    border-bottom: 4px solid rgb(0, 135, 0);
+}
+
+.card-subtitle {
+    width: fit-content;
+}
+
+.underline {
+    text-decoration: underline;
+}

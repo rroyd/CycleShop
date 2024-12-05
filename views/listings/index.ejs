@@ -1,0 +1,77 @@
+<%- layout('./layouts/boilerplate') %>
+
+<article class="listings text-dark container grid">
+  <div class="bg-teritary px-5 container">
+    <section class="row ">
+      <div class="container my-3">
+        <div class="fs-1 text-end mx-">Listings</div>
+        <div class="grid gap-2 row">
+          <div class="col dropdown">
+            <button id="filters" class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Filters
+            </button>
+            <button class="btn green">Reset Filters</button>
+          </div>
+
+
+
+          <form action="/listings/search" method="get" class="col-6">
+            <div class="input-group">
+              <label for="" class="input-group-text">Search</label>
+              <input type="text" class="form-control" name="q" aria-describedby="helpId" placeholder="" />
+              <button class="rounded-0 btn btn-success">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <article class="grid row">
+    <!-- Filters -->
+    <section class="filters gap-4 py-4 px-5 text-light w-50">
+      <div id="arrow" data-popper-arrow></div>
+      <div class="add-filters grid bg-light p-3 px-5 text-dark rounded-5">
+        <div class="grid row">
+          <h3 class="border-left  h-75">Add Filters</h3>
+        </div>
+      </div>
+      <div class="location grid bg-light p-3 px-5 text-dark rounded-5">
+        <div class="grid row">
+          <h3 class="border-left  h-75">Location</h3>
+        </div>
+      </div>
+      <div class="condition grid bg-light p-3 px-5 text-dark rounded-5">
+        <div class="grid row">
+          <h3 class="border-left  h-75">Condition</h3>
+        </div>
+      </div>
+      <div class="brand grid bg-light p-3 px-5 text-dark rounded-5">
+        <div class="grid row">
+          <h3 class="border-left  h-75">Brand</h3>
+        </div>
+      </div>
+      <div class="category grid bg-light p-3 px-5 text-dark rounded-5">
+        <div class="grid row">
+          <h3 class="border-left  h-75">Category</h3>
+        </div>
+      </div>
+      <div class="price-range grid bg-light p-3 px-5 text-dark rounded-5">
+        <div class="grid row">
+          <h3 class="border-left  h-75">Price Range</h3>
+        </div>
+      </div>
+      <button class="apply btn btn-dark">Apply Filters</button>
+    </section>
+
+    <section class="listings-header gap-5 mx-5 col">
+      <% listings.forEach(listing => { %>
+      <%- include('./listing', {listing}) %>
+      <% }) %>
+
+    </section>
+
+  </article>
+</article>
+
+<script src="/js/createPopper.js"></script>

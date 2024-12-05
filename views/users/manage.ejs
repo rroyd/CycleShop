@@ -1,0 +1,20 @@
+<%- layout('./layouts/boilerplate') %>
+
+<article class="manage grid row">
+  <section class="grid bg-success col-3 p-0 m-0">
+    <div class="text-light my-4 container align-items-center px-5 row">
+      <h1 class="col bold"><%= userLogged.username %></h1>
+      <a href="/users/<%= userLogged._id %>/profile" class="col-3"> <img src="https://cdn-icons-png.freepik.com/512/8742/8742495.png" class="object-fit-cover img-fluid rounded-top" alt="" />
+      </a>
+    </div>
+    <a href="/users/<%= userLogged._id %>/manage?p=notifications" class="<%= (p==="notifications") ? 'active' : ''%> row btn rounded-0 btn-success m-0 w-100 text-start px-5 py-3 mb-3">Notifications</a>
+    <a href="/users/<%= userLogged._id %>/manage?p=bookmarks" class="<%= (p==="bookmarks") ? 'active' : ''%> row btn rounded-0 btn-success m-0 w-100 text-start px-5 py-3 mb-3">Bookmarks</a>
+    <a href="/users/<%= userLogged._id %>/manage?p=listings" class="<%= (p==="listings") ? 'active' : ''%> row btn rounded-0 btn-success m-0 w-100 text-start px-5 py-3 mb-3">Listings</a>
+    <a href="/users/<%= userLogged._id %>/manage?p=editProfile" class="<%= (p==="editProfile") ? 'active' : ''%> row btn rounded-0 btn-success m-0 w-100 text-start px-5 py-3 mb-3">Edit Profile</a>
+    <a href="/logout" class="row btn rounded-0 btn-danger m-0 w-100 text-start px-5 py-3 mb-3">Logout</a>
+  </section>
+
+  <section class="col">
+    <%- include(`./manage/${p}`, {listings}) %>
+  </section>
+</article>

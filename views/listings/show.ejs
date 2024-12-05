@@ -1,0 +1,256 @@
+<%- layout('./layouts/boilerplate') %>
+
+<% let {_id, name, description, photos, price, discount, currency, seller} = listing %>
+<% let {username} = seller %>
+
+<script>
+  let price = `<%- price %>`;
+  let currency = `<%- currency %>`
+</script>
+
+<article class="grid mt-5  container-fluid w-75">
+  <section class="row gap">
+    <div class="grid col">
+      <div class="row">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-theme="dark">
+          <div class="carousel-indicators">
+            <% for(let i = 0; i<photos.length; i++) { %>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"></button>
+            <% } %>
+          </div>
+          <div class="carousel-inner">
+            <% photos.forEach((photo, i) => { %>
+            <div class="carousel-item <%= (!i) ? 'active' : ''%>">
+              <img src="<%= photo %>" class="d-block object-fit-cover" style="height: 400px; width: 100%;" alt="...">
+            </div>
+            <% }) %>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+
+      <div class="row grid mt-3">
+        <h1 class="border-left col-6 bold w-75">Similar Products</h1>
+      </div>
+
+      <div class="listings row">
+        <% for(let listing of listings) { %>
+        <div class="col-6">
+          <%- include('./listing', {listing}) %>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <div class="col-6 grid row-gap-2">
+      <div class="row my-3">
+        <h1 class="border-left col bold"><%= name %></h1>
+        <p class="col text-end">24
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+          </svg>
+        </p>
+      </div>
+      <div class="d-flex align-items-center my-3">
+        <div class="grid row">
+          <svg class="d-inline-block w-auto green" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+          </svg>
+          <h6 class="col">Ashdod, Israel</h6>
+        </div>
+        <div class="vr mx-3"></div>
+        <div class="grid row">
+          <h6 class="col">2hrs ago</h6>
+        </div>
+        <div class="vr mx-3"></div>
+        <div class="grid row">
+          <h6 class="col ">By <a class="green" href="/users/<%= listing.seller._id %>"><%= listing.seller.username %></a></h6>
+        </div>
+      </div>
+      <div class="row my-2">
+        <p>
+          <%= listing.description %>
+        </p>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row mb-3 grid">
+            <div class="col">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ui-checks-grid" viewBox="0 0 16 16">
+                <path d="M2 10h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1m9-9h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 9a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zm0-10a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM2 9a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2zm7 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2zM0 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5.354.854a.5.5 0 1 0-.708-.708L3 3.793l-.646-.647a.5.5 0 1 0-.708.708l1 1a.5.5 0 0 0 .708 0z" />
+              </svg>
+              Electronics
+            </div>
+            <div class="col">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
+                <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
+              </svg>
+              Self Pickup
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3-fill" viewBox="0 0 16 16">
+                <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z" />
+              </svg>
+              Like New
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center grid gap-3 col-4">
+          <h2 class="d-inline-block m-0 p-0">+1</h2>
+          <button class="btn btn-outline-dark rounded-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+              <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
+            </svg>
+          </button>
+          <button class="btn btn-outline-dark rounded-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down-fill" viewBox="0 0 16 16">
+              <path d="M6.956 14.534c.065.936.952 1.659 1.908 1.42l.261-.065a1.38 1.38 0 0 0 1.012-.965c.22-.816.533-2.512.062-4.51q.205.03.443.051c.713.065 1.669.071 2.516-.211.518-.173.994-.68 1.2-1.272a1.9 1.9 0 0 0-.234-1.734c.058-.118.103-.242.138-.362.077-.27.113-.568.113-.856 0-.29-.036-.586-.113-.857a2 2 0 0 0-.16-.403c.169-.387.107-.82-.003-1.149a3.2 3.2 0 0 0-.488-.9c.054-.153.076-.313.076-.465a1.86 1.86 0 0 0-.253-.912C13.1.757 12.437.28 11.5.28H8c-.605 0-1.07.08-1.466.217a4.8 4.8 0 0 0-.97.485l-.048.029c-.504.308-.999.61-2.068.723C2.682 1.815 2 2.434 2 3.279v4c0 .851.685 1.433 1.357 1.616.849.232 1.574.787 2.132 1.41.56.626.914 1.28 1.039 1.638.199.575.356 1.54.428 2.591" />
+            </svg>
+          </button>
+        </div>
+        <div class="row my-3">
+          <button class="col-3 rounded-0 btn btn-outline-dark">
+            Buy Now
+          </button>
+          <button class="col-3 rounded-0 btn mx-2 btn-success">
+            Add to cart
+          </button>
+          <% if (userLogged) { %>
+          <% if (userLogged.bookmarks.find(bookmark => bookmark._id.equals(_id))) { %>
+          <form action="/users/<%= userLogged._id %>/bookmarks?_method=DELETE" class="rounded-0 col-3 mx-1 p-0" method="post">
+            <input type="text" style="display: none;" name="bookmark[id]" value="<%= listing._id %>">
+            <button class="rounded-0 btn btn-outline-danger h-100 col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+              </svg></button>
+          </form>
+          <% } else {%>
+          <form action="/users/<%= userLogged._id %>/bookmarks" class="rounded-0 col-3 mx-1 p-0" method="post">
+            <input type="text" style="display: none;" name="bookmark[id]" value="<%= listing._id %>">
+            <button class="rounded-0 btn btn-outline-light text-dark h-100 col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+              </svg></button>
+          </form>
+          <% } %>
+          <% } %>
+          <h1 class="m-0 p-0 bold rounded-corners w-auto text-light bg-success py-2 px-2 col text-end"><%= price %> <%= currency %></h1>
+        </div>
+        <div class="row my-3  ">
+          <div class=" border-left col mt-3 fs-1 bold">Offer Discount <a class="green d-inline fs-5">(How does it work?)</a>
+          </div>
+        </div>
+        <div class="row">
+          <form action="/listings/<%= _id %>/discount" method="POST">
+            <div class="input-group mb-3">
+              <textarea class="form-control" name="discount[description]" placeholder="Offer description" rows="3"></textarea>
+            </div>
+            <div class="input-group gap-3 mb-3">
+              <input type="number" class="col form-control" placeholder="Amount" min="0" max="100" name="offer[amount]" aria-describedby="helpId" />
+              <span class="fs-3">%</span>
+              <h6 for="" class="m-0 p-0 col">New price: <span id="new_price" class="fs-4 bold green"><%= price %><%= currency %></span></h6>
+              <button type="submit" class=" rounded-0 btn btn-success">
+                Offer Discount
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="row my-4">
+          <div class=" border-left col mt-3 fs-1 bold">About the seller</div>
+        </div>
+        <div class="row">
+          <div class="card mb-3 rounded-0 border border-secondary-subtle">
+            <a href="/users/<%= seller._id %>">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="..." class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= username %></h5>
+                    <div class="card-subtitle green">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      </svg>
+                    </div>
+                    <p class="card-text">Lorem ipsum dolor sit, suscipit quae eos incidunt recusandae quaerat voluptatum nobis soluta odio. Dignissimos culpa quia ipsa optio laborum.</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="row my-4">
+          <div class=" border-left col mt-3 fs-1 bold">Review Seller</div>
+        </div>
+
+        <form action="/users/<%= seller._id %>/reviews" class="form needs-validation" method="post">
+          <div class="input-group mb-3">
+            <div class="input-group-text ">Leave Rating:</div>
+            <div class="d-flex gap-2 align-items-center mx-3">
+              <input type="text" style="display: none;" id="star-review" name="review[rating]" value="1" min='1' max='5'>
+              <%- include('./../partials/stars', {color: '', form: true, number: 0}) %>
+            </div>
+
+          </div>
+          <div class="input-group mb-3">
+            <textarea class="col form-control" name="review[body]" placeholder="Review body" rows="3"></textarea>
+            <button type="submit" class="col-3 btn btn-success">
+              Review
+            </button>
+          </div>
+        </form>
+      </div>
+      <% if (reviews.length) { %>
+      <% for(let {_id, rating, body, userFrom} of reviews) { %>
+      <div class="row" id="<%= _id %>">
+        <div class="card mb-3 rounded-0 border border-secondary-subtle bg-subtle text-start">
+          <div class="grid card-body">
+            <div class="row">
+              <div class="col d-flex align-items-center gap-2">
+                <h6 class="col-auto p-0  m-0 card-title mx-2 d-inline-block"><a href="/users/<% userFrom._id %>/profile" class="green"><%= userFrom.username %></a></h6>
+                <div class="vr mx-2"></div>
+                <%- include('./../partials/stars', {color: '', form: false, number: rating}) %>
+              </div>
+
+              <div class="mx-5 my-2">
+                <% if(body) { %>
+                <p class="card-text mt-3"><%= body %></p>
+                <% } else { %>
+                <small class="text-secondary">N/A</small>
+                <% } %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <% } %>
+      <% } %>
+    </div>
+  </section>
+</article>
+
+
+<script src="/js/visual.js"></script>

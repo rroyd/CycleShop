@@ -1,0 +1,187 @@
+<section class="container grid my-5">
+  <div class="row container">
+    <h1 class="bold border-left">Listings</h1>
+    <p>Analyze, Edit and manage your listings</p>
+  </div>
+
+  <div class="container w-auto grid card my-4">
+    <% for(let {_id, name, description, price, currency, arrivalType, state, category, sold, discount, photos, tags, ratings, offers, geometry} of listings) { %>
+    <div class="row">
+      <div class="card p-0 border border-secondary-subtle bg-body-tertiary text-start">
+        <div class="card-header row gap-2 align-items-center noti bg-white m-0 p-3" data-bs-toggle="collapse" href="#<%=_id%>" role="button" aria-expanded="false" aria-controls="<%=_id%>">
+          <div class="col">
+            <h4 class="bold d-inline-block card-title text-success m-0a"><%= name %></h4>
+            <div class="mx-2 vr"></div>
+            <p class="d-inline-block m-0">2hrs ago</p>
+          </div>
+          <h6 class="col-1 w-auto d-inline-block border border-1 border-success text-success rounded-1 py-2 m-0">Active</h6>
+          <div class="col-1 m-0 p-2 rounded-1 d-inline-block justify-self-end bg-success text-light text-end w-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg></div>
+        </div>
+        <span id="<%= _id %>" class="collapse">
+          <!-- <div class="card-subtitle text-end p-1 px-3 curved text-light bg-success">
+            <a href="#" class="text-light">You</a>
+          </div> -->
+          <div class="bg-white px-5 py-2 border border-secondary-subtle">
+            <h2 class="border-left m-0 text-end px-5" data-bs-toggle="collapse" href="#<%=_id%>_edit" role="button" aria-expanded="false" aria-controls="<%=_id%>_edit"> Edit </h2>
+          </div>
+          <div class="card-body row collapse" id="<%=_id%>_edit">
+            <div class="col">
+              <div class="input-group mb-3">
+                <span class="w-25">Title</span>
+                <input type="text" name="listing[title]" id="listing[title]" class="form-control" placeholder="Title" required value="<%= name %>" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="w-25">Description</span>
+                <textarea type="text" name="listing[description]" id="listing[description]" class="form-control" placeholder="description" rows="3" required><%= description %></textarea>
+              </div>
+              <div class="input-group mb-3">
+                <span class="w-25">Images</span>
+                <input class="form-control" name="photos" type="file" id="files" multiple>
+              </div>
+              <div class="preview my-3"></div>
+              <div class="input-group mb-3">
+                <span class="w-25">Select images to remove:</span>
+                <% photos.forEach((photo, i) => { %>
+                <div class="d-flex flex-column justify-content-center">
+                  <img src="<%= photo %>" alt="photo<%=i%>" class="object-fit-contain" style="width: 50px;">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" class="bg-danger" name="photosToDelete[]" value="<%= photo %>" />
+                  </div>
+                </div>
+                <% }) %>
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group row mb-3">
+                <div class="col">
+                  <div class="input-group mb-3">
+                    <span class="w-25">Price</span>
+                    <input type="number" name="listing[price]" id="listing[name]" class="form-control" placeholder="24.99" required value="<%= price %>" />
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <span class="mx-2 text-start">Arrival Type </span>
+                    <select class="form-select" name="listing[currency]">
+                      <option selected>Select choice</option>
+                      <option value="CAD$">Self pickup</option>
+                      <option value="₪">Ship to home</option>
+                      <option value="€">Ship to point</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="input-group mb-3">
+                    <span class="w-auto mx-2">Currency</span>
+                    <select class="form-select" name="listing[currency]">
+                      <option selected>Select currency</option>
+                      <option value="$">USD</option>
+                      <option value="CAD$">CAD</option>
+                      <option value="₪">ILS</option>
+                      <option value="€">EUR</option>
+                    </select>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="w-auto mx-2">Category</span>
+                    <input type="text" name="listing[category]" id="listing[category]" class="form-control" placeholder="Electronics" required />
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <span class="w-25">Condition</span>
+                <select class="form-select" name="listing[condition]">
+                  <option selected>Select condition</option>
+                  <option value="CAD$">Like new</option>
+                  <option value="₪">New</option>
+                  <option value="€">Old</option>
+                </select>
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-label w-25">Add tags</span>
+                <input type="text" name="listing.tags[]" class="form-control">
+              </div>
+
+              <div class="input-group row mb-3">
+                <div class="col">
+                  <div class="input-group">
+                    <span class="input-label w-25">City</span>
+                    <input type="text" name="listing[city]" class="form-control">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="input-group">
+                    <span class="input-label w-25">State</span>
+                    <input type="text" name="listing[state]" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-label w-25">Country</span>
+                <input type="text" name="listing[country]" class="form-control">
+              </div>
+            </div>
+            <div class="container d-flex justify-content-end gap-2">
+              <button class="w-auto btn btn-secondary bg-secondary-subtle text-dark border-0">
+                Reset
+              </button>
+              <button class="w-auto btn btn-success">
+                Apply changes
+              </button>
+            </div>
+          </div>
+          </form>
+
+          <div class="bg-white px-5 py-2 border border-secondary-subtle">
+            <h2 class="border-left m-0 text-end px-5" data-bs-toggle="collapse" href="#<%=_id%>_offers" role="button" aria-expanded="false" aria-controls="<%=_id%>_offers"> Offers </h2>
+          </div>
+
+          <div class="container my-3 collapse" id="<%= _id %>_offers">
+            <% if (offers.length) { %>
+            <% offers.forEach(({from, body, amount}) => { %>
+            <div class="row">
+              <div class="col-3">
+
+              </div>
+            </div>
+            <% }) %>
+            <% } else { %>
+            <h5>No offers on this listing yet</h5>
+            <% } %>
+          </div>
+
+          <div class="bg-white px-5 py-2 border border-secondary-subtle">
+            <h2 class="border-left m-0 text-end px-5" data-bs-toggle="collapse" href="#<%=_id%>_visibility" role="button" aria-expanded="false" aria-controls="<%=_id%>_visibility"> Visibility </h2>
+          </div>
+
+          <div class="container my-3 collapse" id="<%= _id %>_visibility">
+            <form action="/listings/<%= _id %>?_method=PATCH" class="row" method="post">
+              <div class="col">
+                <div class="input-group d-flex align-items-center">
+                  <span class="input-label w-25 m-0">Visibility: </span>
+                  <select class="form-select" name="listing[visibility]">
+                    <option selected value="Active">Like new</option>
+                    <option value="Sold">Sold</option>
+                    <option value="Private">Private</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <form action="/listings/<%= _id %>?_method=DELETE">
+                  <button class="btn btn-danger w-100">Remove Listing</button>
+                </form>
+              </div>
+            </form>
+          </div>
+        </span>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+  <script src="/js/uploader.js"></script>
+
+</section>

@@ -1,0 +1,49 @@
+<%- layout('./layouts/boilerplate') %>
+
+<div class="container d-flex justify-content-center align-items-center p-5">
+  <form class="form needs-validation col-6" enctype="multipart/form-data" action="/listings" method="post" novalidate>
+    <h1 class="text-center mb-3">Add <span class="green">Listing</span></h1>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text">Name</span>
+      <input type="text" name="listing[name]" id="listing[name]" class="form-control" placeholder="Name" required />
+      <!-- <span class="input-group-text">suffix</span> -->
+    </div>
+    <div class="input-group mb-3 gap-2">
+      <span class="input-group-text">Description</span>
+      <textarea class="form-control" name="listing[description]" rows="5" placeholder="Add details about your item..."></textarea>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Price</span>
+      <input type="number" name="listing[price]" id="listing[name]" class="form-control" placeholder="24.99" required />
+      <!-- <span class="input-group-text">suffix</span> -->
+      <span class="input-group-text">Currency</span>
+      <select class="form-select" name="listing[currency]">
+        <option selected>Select currency</option>
+        <option value="$">USD</option>
+        <option value="CAD$">CAD</option>
+        <option value="₪">ILS</option>
+        <option value="€">EUR</option>
+      </select>
+    </div>
+
+
+    <div class="input-group row mb-3">
+      <label class="form-label d-block" for="files">Add photos of your listings:</label>
+      <input class="form-control" class="d-block" name="photos" type="file" id="files" multiple>
+    </div>
+
+    <div class="preview"></div>
+
+    <!-- <div class="input-group mb-3">
+      <label class="input-group-text">Tags</label>
+      <input type="number" name="listing[tags]" id="listing[tags]" class="form-control" placeholder="Electronics.." required />
+    </div> -->
+
+    <button type="submit" class="d-block btn btn-success w-100">
+      Add for sale
+    </button>
+  </form>
+</div>
+
+<script src="/js/uploader.js"></script>

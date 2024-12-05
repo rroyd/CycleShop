@@ -1,0 +1,30 @@
+<% let {_id, name, description, photos, price, discount, currency} = listing %>
+
+<!-- <script src="addToCart.js"></script> -->
+
+<div class="gap-2 rounded-5 py-3 px-2 border border-secondary-subtle shadow-sm listing-card card text-start">
+  <img class="card-img-top" src="<%= photos[0] %>" alt="Title" class='object-fit-cover' />
+  <div class="grid p-0 px-0 card-body">
+    <div class="row listing-main">
+      <div class="col-8 listing-main">
+        <h2 class="bold p-0 px-2 m-0"><%= name %></h2>
+      </div>
+      <div class="price bg-success text-end text-light col-4">
+        <h3 class="p-0 m-0"><%= price %> <%= currency %></h3>
+      </div>
+    </div>
+    <div class="px-2 row">
+      <div class="col">
+        <svg class="green" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+        </svg>
+        <h6 class="my-2 text-secondary d-inline-block">Ashdod, Israel</h6>
+      </div>
+    </div>
+    <div class="row gap-3 text-light secondary py-2 px-5">
+      <a class="btn btn-outline-secondary bg-light col" href="/listings/<%= _id %>">More details</a>
+      <a class="btn btn-dark col" onclick="addToCart()">Add to cart</a>
+    </div>
+  </div>
+  </a>
+</div>
