@@ -5,14 +5,14 @@
   </div>
 
   <div class="container w-auto grid card my-4">
-    <% for(let {_id, name, description, price, currency, arrivalType, state, category, sold, discount, photos, tags, ratings, offers, geometry} of listings) { %>
-    <div class="row">
+    <% for(let {_id, name, description, price, currency, arrivalType, state, category, sold, discount, photos, tags, ratings, offers, geometry, timeAgo} of listings) { %>
+    <div class="row mb-3">
       <div class="card p-0 border border-secondary-subtle bg-body-tertiary text-start">
         <div class="card-header row gap-2 align-items-center noti bg-white m-0 p-3" data-bs-toggle="collapse" href="#<%=_id%>" role="button" aria-expanded="false" aria-controls="<%=_id%>">
           <div class="col">
-            <h4 class="bold d-inline-block card-title text-success m-0a"><%= name %></h4>
+            <h4 class="bold d-inline-block card-title text-success m-0 "><%= name %></h4>
             <div class="mx-2 vr"></div>
-            <p class="d-inline-block m-0">2hrs ago</p>
+            <p class="d-inline-block m-0"><%= timeAgo %></p>
           </div>
           <h6 class="col-1 w-auto d-inline-block border border-1 border-success text-success rounded-1 py-2 m-0">Active</h6>
           <div class="col-1 m-0 p-2 rounded-1 d-inline-block justify-self-end bg-success text-light text-end w-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
@@ -169,12 +169,12 @@
                   </select>
                 </div>
               </div>
-              <div class="col">
-                <form action="/listings/<%= _id %>?_method=DELETE">
-                  <button class="btn btn-danger w-100">Remove Listing</button>
-                </form>
-              </div>
             </form>
+            <div class="col">
+              <form action="/listings/<%= _id %>?_method=DELETE" method="post">
+                <button class="btn btn-danger w-100">Remove Listing</button>
+              </form>
+            </div>
           </div>
         </span>
       </div>

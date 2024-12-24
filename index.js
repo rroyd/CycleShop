@@ -29,7 +29,8 @@ const { router: reviewRouter } = require("./routes/reviewsRouter");
 const { router: bookmarksRouter } = require("./routes/bookmarksRouter")
 const {router: notificationsRouter} = require("./routes/notificationsRouter")
 const {router: connectionRouter} = require("./routes/connectionRouter")
-
+const {router: reviewsRouter} = require("./routes/reviewsRouter")
+ 
 const { ExpressError } = require("./errors/ExpressError");
 
 const notifications = require("./controllers/notificationsController")
@@ -81,11 +82,15 @@ app.use((req, res, next) => {
 });
 
 app.use((req,res,next) => {
-    if(req.baseUrl !== "/connections") { 
-      req.redirectTo = req.originalUrl;
+    if(req.url.includes("/listings")) {
+      console.log("HEY")
+      req.redirectFromReview = req.originalUrl;
     }
+
     next();
 })
+
+
 
 //Get notifications
 app.use(notifications.index)
@@ -108,6 +113,10 @@ app.use("/users/:userId/bookmarks", bookmarksRouter)
 app.use("/notifications", notificationsRouter)
 
 app.use("/connections", connectionRouter)
+
+app.use("/reviews", reviewsRouter)
+
+app.get("/about", (req,res) => res.render("about"))
 
 //Error catching
 //Page not found

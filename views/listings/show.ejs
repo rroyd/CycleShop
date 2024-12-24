@@ -52,12 +52,7 @@
     <div class="col-6 grid row-gap-2">
       <div class="row my-3">
         <h1 class="border-left col bold"><%= name %></h1>
-        <p class="col text-end">24
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
-            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
-          </svg>
-        </p>
+
       </div>
       <div class="d-flex align-items-center my-3">
         <div class="grid row">
@@ -68,7 +63,7 @@
         </div>
         <div class="vr mx-3"></div>
         <div class="grid row">
-          <h6 class="col">2hrs ago</h6>
+          <h6 class="col"><%= listing.timeAgo %></h6>
         </div>
         <div class="vr mx-3"></div>
         <div class="grid row">
@@ -171,7 +166,7 @@
             <a href="/users/<%= seller._id %>">
               <div class="row g-0">
                 <div class="col-md-4">
-                  <img src="..." class="img-fluid rounded-start" alt="...">
+                  <img src="<%= seller.profilePic %>" class="img-fluid rounded-start">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
@@ -224,13 +219,15 @@
         </form>
       </div>
       <% if (reviews.length) { %>
-      <% for(let {_id, rating, body, userFrom} of reviews) { %>
+      <% for(let {_id, rating, body, userFrom, timeAgo} of reviews) { %>
       <div class="row" id="<%= _id %>">
         <div class="card mb-3 rounded-0 border border-secondary-subtle bg-subtle text-start">
           <div class="grid card-body">
             <div class="row">
               <div class="col d-flex align-items-center gap-2">
-                <h6 class="col-auto p-0  m-0 card-title mx-2 d-inline-block"><a href="/users/<% userFrom._id %>/profile" class="green"><%= userFrom.username %></a></h6>
+                <h5 class="col-auto p-0  m-0 card-title mx-2 d-inline-block"><a href="/users/<% userFrom._id %>/profile" class="green"><%= userFrom.username %></a></h5>
+                <div class="vr mx-2"></div>
+                <h6 class="m-0 p-0"><%= timeAgo %></h6>
                 <div class="vr mx-2"></div>
                 <%- include('./../partials/stars', {color: '', form: false, number: rating}) %>
 
@@ -243,22 +240,26 @@
                     </svg>
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a id="editReview" class="dropdown-item">Edit Review</a></li>
-                    <li><a class="dropdown-item btn btn-danger">
-                        <form method="post" action="/review?_method=DELETE">Delete Review</form>
-                      </a></li>
+                    <li id="editReview" class="btn dropdown-item">Edit Review</li>
+                    <form action="/reviews/<%= _id %>?_method=DELETE" method="post">
+                      <li type="submit" class="cs-delete-review dropdown-item btn btn-danger text-danger">
+                        Delete Review
+                      </li>
+                    </form>
                   </ul>
                 </div>
                 <% } %>
                 <% } %>
               </div>
 
-              <div class="mx-5 my-2">
-                <% if(body) { %>
-                <p class="card-text mt-3"><%= body %></p>
-                <% } else { %>
-                <small class="text-secondary">N/A</small>
-                <% } %>
+              <div class="mx-5 my-2 cs-review d-flex w-75 gap-2 container">
+                <form class="<%= (userLogged._id.equals(userFrom._id)) ? 'cs-edit-form' : '' %> d-flex gap-2 w-100" action="/reviews/<%= _id %>?_method=PUT" method="post">
+                  <% if(body) { %>
+                  <p class="card-text mt-3"><%= body %></p>
+                  <% } else { %>
+                  <small class="text-secondary">N/A</small>
+                  <% } %>
+                </form>
               </div>
             </div>
           </div>
@@ -271,5 +272,6 @@
   </section>
 </article>
 
+<script src="/js/editReview.js"></script>
 
 <script src="/js/visual.js"></script>

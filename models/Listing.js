@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const {format} = require("timeago.js");
 
 const locationSchema = new Schema({
   type: {
@@ -22,6 +23,10 @@ const offerSchema = new Schema({
     type: Number,
     min: 0,
     max: 100,
+    required: true
+  },
+  timeCreated: {
+    type: Date,
     required: true
   }
 })
@@ -84,7 +89,15 @@ const listingSchema = new Schema({
   geometry: {
     type: locationSchema,
   },
+  timeCreated: {
+    type: Date,
+    required: true
+  }
 });
+
+listingSchema.virtual("timeAgo").get(function() {
+    return format(this.timeCreated);
+})
 
 const Listing = mongoose.model("Listing", listingSchema);
 

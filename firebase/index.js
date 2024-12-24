@@ -38,6 +38,17 @@ const uploadImageToStorage = (file, model) => {
     });
   }
 
+
+  const uploadImagesToStorage = (files, model) => {
+    let promiseArray = [];
+
+    files.forEach((file, i) => promiseArray.push(uploadImageToStorage(file, model)));
+
+    return Promise.all(promiseArray);  
+  }
+
+
 module.exports = {
-    uploadImageToStorage 
+    uploadImageToStorage,
+    uploadImagesToStorage
 }

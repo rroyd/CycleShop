@@ -3,7 +3,7 @@
 <article class="manage grid row">
   <section class="grid bg-success col-3 p-0 m-0">
     <div class="text-light my-4 container align-items-center px-5 row">
-      <h1 class="col bold"><%= userLogged.username %></h1>
+      <h5 class="col bold"><%= userLogged.username %></h5>
       <a href="/users/<%= userLogged._id %>/profile" class="col-3"> <img src="<%= (!userLogged.profilePic) ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" : userLogged.profilePic %>" class="object-fit-cover img-fluid rounded-top" alt="" />
       </a>
     </div>

@@ -1,16 +1,20 @@
 <nav class="navbar bg-dark fixed-top border-bottom border-body text-light" data-bs-theme="dark">
   <div class="nav container-fluid mx-4 justify-content-center gap-3 align-items-center">
-    <div class="nav-item justify-self-center">
+    <div class="nav-item d-flex justify-self-center">
       <div class="navbar-brand">
-        <a href="/" class="nav-link">Cycle<span class="green">Shop</span></a>
+        <a href="/" class="nav-link mx-5">Cycle<span class="green">Shop</span></a>
       </div>
     </div>
-    <div class="flex-grow-1 d-flex justify-content-start">
+
+    <div class="flex-grow-1 d-flex justify-content-start d-none d-lg-flex">
       <div class="nav-item">
         <a href="/about" class="nav-link">About</a>
       </div>
       <div class="nav-item">
         <a href="/listings" class="nav-link">Listings</a>
+      </div>
+      <div class="nav-item">
+        <a href="/community" class="nav-link">Community</a>
       </div>
       <!-- <div class="nav-item">
         <a href="/blog" class="nav-link">Blog</a>
@@ -19,8 +23,12 @@
         <a href="/support" class="nav-link">Support</a>
       </div>
     </div>
+
+    <button class="navbar-toggler d-block d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <% if (userLogged) { %>
-    <div class="nav-item justify-self-end">
+    <div class="nav-item justify-self-end d-none d-lg-flex">
       <a href="/listings/create" class="btn btn-success">Add Listing</a>
       <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
         <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1z" />
@@ -60,16 +68,17 @@
       </a>
     </div>
     <% } else {%>
-    <div class="nav-item justify-self-end">
+    <div class="nav-item justify-self-end d-none d-xl-flex gap-2">
+      <a class="btn btn-outline-white" href="/register">Register</a>
       <a class="btn btn-success" href="/login">Login</a>
     </div>
     <% } %>
-    <a href="/cart" class="btn nav-item">
+    <a href="/cart" class="btn nav-item d-none d-lg-flex">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
       </svg>
     </a>
-    <form class="d-flex" role="search">
+    <form class="d-none d-xxl-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <a href="/listings/search" class="btn btn-success nav-item">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -77,5 +86,90 @@
         </svg>
       </a>
     </form>
+  </div>
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <div class="nav-item">
+          <a href="/about" class="nav-link">About</a>
+        </div>
+        <div class="nav-item">
+          <a href="/listings" class="nav-link">Listings</a>
+        </div>
+        <div class="nav-item">
+          <a href="/community" class="nav-link">Community</a>
+        </div>
+        <!-- <div class="nav-item">
+            <a href="/blog" class="nav-link">Blog</a>
+          </div> -->
+        <div class="nav-item">
+          <a href="/support" class="nav-link">Support</a>
+        </div>
+
+        <form class="d-flex mt-3 my-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+        <% if (userLogged) { %>
+        <div class="nav-item justify-self-end">
+          <a href="/listings/create" class="btn btn-success">Add Listing</a>
+          <div class="dropdown mx-2 d-inline-block ">
+            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+              </svg>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/users/<%= userLogged._id %>/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="/users/<%= userLogged._id %>/manage?p=notifications">Notifications <% if (userNotifications.length) { %>
+                  <span class="badge text-black bg-white"><%= userNotifications.length %></span>
+                  <% } %></a></li>
+              <li><a class="dropdown-item" href="/users/<%= userLogged._id %>/manage?p=bookmarks">Bookmarks</a></li>
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li><a class="dropdown-item" href="/users/<%= userLogged._id %>/manage">Manage</a></li>
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+            </ul>
+          </div>
+
+          <a href="/users/<%= userLogged._id %>/manage?p=bookmarks" class="btn nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+              <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1z" />
+              <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1" />
+            </svg>
+          </a>
+          <a href="/cart" class="btn nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+            </svg>
+          </a>
+
+        </div>
+        <% } else {%>
+        <div class="nav-item w-100 justify-self-center align-items-center">
+          <a class="btn btn-success" href="/login">Login</a>
+          <a class="btn btn-outline-white" href="/register">Register</a>
+          <a href="/cart" class="btn nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+            </svg>
+          </a>
+        </div>
+        <% } %>
+    </div>
+
+    </ul>
+
+  </div>
   </div>
 </nav>

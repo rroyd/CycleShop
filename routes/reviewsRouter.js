@@ -12,8 +12,9 @@ const {checkReviewOwnership} = require("./../middleware")
 router.route("/")
     .post(auth.isAuthorized,validator('review'),handleAsync(reviews.create))
 
-router.route("/:id")
-    .put(auth.isAuthorized, validator('review'), handleAsync(reviews.edit))
-    .delete(auth.isAuthorized, checkReviewOwnership, handleAsync(reviews.destroy))
+router.route("/:reviewId")
+    .all(auth.isAuthorized, checkReviewOwnership)
+    .put(handleAsync(reviews.edit))
+    .delete(handleAsync(reviews.destroy))
 
 module.exports = {router}

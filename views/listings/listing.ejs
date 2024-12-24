@@ -3,14 +3,14 @@
 <!-- <script src="addToCart.js"></script> -->
 
 <div class="gap-2 rounded-5 py-3 px-2 border border-secondary-subtle shadow-sm listing-card card text-start">
-  <img class="card-img-top" src="<%= photos[0] %>" alt="Title" class='object-fit-cover' />
+  <img class="card-img-top rounded-top-corners" src="<%= photos[0] %>" alt="Title" class='object-fit-cover' />
   <div class="grid p-0 px-0 card-body">
-    <div class="row listing-main">
+    <div class="row listing-main text-overflow">
       <div class="col-8 listing-main">
-        <h2 class="bold p-0 px-2 m-0"><%= name %></h2>
+        <h6 class="bold p-0 m-0  card-title text-overflow"><%= name %></h6>
       </div>
-      <div class="price bg-success text-end text-light col-4">
-        <h3 class="p-0 m-0"><%= price %> <%= currency %></h3>
+      <div class="price bg-success  text-light col-4">
+        <h5 class="p-0 m-0 text-overflow"><span class="light"><%= price %></span><small><%= currency %></small></h5>
       </div>
     </div>
     <div class="px-2 row">

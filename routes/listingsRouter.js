@@ -3,10 +3,9 @@ const { handleAsync } = require("../errors/ExpressError");
 const listings = require("../controllers/listingsController");
 const auth = require("../controllers/authController");
 const validator = require("../validations");
-const {storage} = require("../firebase");
 
-const multer = require("multer")
-const upload = multer({storage});
+const Multer = require("multer")
+const upload = Multer({storage: Multer.memoryStorage()})
 
 const router = express.Router({ mergeParams: true });
 
@@ -16,8 +15,7 @@ router
   .route("/")
   .get(handleAsync(listings.index))
   .post(auth.isAuthorized,
-    upload.array('photos'),
-    validator('listing'),
+    upload.any('photos'),
     handleAsync(listings.create));
 
 //Search for listings
@@ -30,7 +28,7 @@ router.get("/create",auth.isAuthorized, handleAsync(listings.createForm));
 router
   .route("/:id")
   .get(handleAsync(listings.show))
-  .put(validator("listing"),handleAsync(listings.edit))
+  .put(handleAsync(listings.edit))
   .delete(handleAsync(listings.destroy));
 
 

@@ -1,5 +1,9 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
+const {format, register} = require("timeago.js")
+const {localeFunc} = require("../services/timeAgo")
+
+register("my-locale", localeFunc);
 
 const notificationSchema = new Schema({
     type: {
@@ -29,7 +33,15 @@ const notificationSchema = new Schema({
       type: Schema.ObjectId,
       ref: "Listing"
     },
+    timeCreated: {
+      type: Date,
+      required: true
+    }
   })
+
+notificationSchema.virtual("timeAgo").get(function() {
+  return format(this.timeCreated, "my-locale");
+})
 
 const Notification = mongoose.model("Notification", notificationSchema);
 
