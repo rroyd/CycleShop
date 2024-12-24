@@ -2,7 +2,6 @@ const {Notification} = require("./../models/Notification")
 
 module.exports.index = async (req,res,next) => {
     res.locals.userNotifications = await Notification.find({userTo: req.user}).populate("userTo").populate("userFrom")
-    console.log(res.locals.userNotifications)
     return next();
 }
 

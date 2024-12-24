@@ -4,7 +4,7 @@
   <section class="grid bg-success col-3 p-0 m-0">
     <div class="text-light my-4 container align-items-center px-5 row">
       <h1 class="col bold"><%= userLogged.username %></h1>
-      <a href="/users/<%= userLogged._id %>/profile" class="col-3"> <img src="https://cdn-icons-png.freepik.com/512/8742/8742495.png" class="object-fit-cover img-fluid rounded-top" alt="" />
+      <a href="/users/<%= userLogged._id %>/profile" class="col-3"> <img src="<%= (!userLogged.profilePic) ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" : userLogged.profilePic %>" class="object-fit-cover img-fluid rounded-top" alt="" />
       </a>
     </div>
     <a href="/users/<%= userLogged._id %>/manage?p=notifications" class="<%= (p==="notifications") ? 'active' : ''%> row btn rounded-0 btn-success m-0 w-100 text-start px-5 py-3 mb-3">Notifications</a>

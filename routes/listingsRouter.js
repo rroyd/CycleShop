@@ -2,23 +2,11 @@ const express = require("express");
 const { handleAsync } = require("../errors/ExpressError");
 const listings = require("../controllers/listingsController");
 const auth = require("../controllers/authController");
-const validator = require("../validations")
+const validator = require("../validations");
+const {storage} = require("../firebase");
 
 const multer = require("multer")
-const FirebaseStorage = require("multer-firebase-storage");
-const firebaseAdmin = require("firebase-admin");
-
-const creds = require("./../firebase/cycleshop-1f3fd-firebase-adminsdk-gy0o2-1de76c6968.json")
-const {firebaseConfig} = require("./../config")
-
-const client = firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(creds),
-  storageBucket: process.env.FIREBASE_BUCKET_URL
-})
-
-const upload = multer({storage: FirebaseStorage(
-  {...firebaseConfig, directoryPath: "listings"}
-  , client)});
+const upload = multer({storage});
 
 const router = express.Router({ mergeParams: true });
 

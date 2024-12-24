@@ -39,6 +39,7 @@ const app = express();
 //Connect to database
 connectDB();
 
+
 //for template rendering engine
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -68,6 +69,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(morgan("dev"))
+
 //Attaching user and flashes to response object
 app.use((req, res, next) => {
   res.locals.userLogged = req.user;
@@ -81,7 +84,7 @@ app.use((req,res,next) => {
     if(req.baseUrl !== "/connections") { 
       req.redirectTo = req.originalUrl;
     }
-    next()
+    next();
 })
 
 //Get notifications

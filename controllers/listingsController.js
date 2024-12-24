@@ -20,6 +20,8 @@ module.exports.show = async (req, res) => {
   //Load seller reviews
   const reviews = await Review.find({userTo: listing.seller._id}).populate("userFrom")
 
+  console.log(reviews)
+
   res.render("listings/show", {listings, listing, reviews});
 };
 

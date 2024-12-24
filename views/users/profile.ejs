@@ -3,7 +3,7 @@
 <article class="container grid mt-4">
   <section class="row card-body bg-body-tertiary align-items-center">
     <div class="col-3">
-      <img src="<%= user.profilePic %>" class="rounded-pill border border-secondary-subtle h-100" alt="">
+      <img src="<%= user.profilePic %>" class="rounded-pill border border-secondary-subtle w-100" alt="">
     </div>
     <div class="col grid p-0">
       <span class="bg-white d-block border border-secondary-subtle ">
@@ -19,7 +19,7 @@
 
       <span class=" border-right d-block ">
         <p class="my-4 bg-white py-3 px-2 border border-secondary-subtle">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil eos quam incidunt officia, eveniet modi veniam officiis animi optio vel? Praesentium tempore perferendis molestiae eligendi laborum odio doloribus alias aspernatur.
+          <%= user.biography %>
         </p>
       </span>
 
@@ -73,9 +73,9 @@
                   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                 </svg></div> -->
             </div>
-            <div class="card-body">
+            <div class="col-12 gap-2 profile-listing card-body">
               <% for(let listing of userListings) { %>
-              <div class="col-4">
+              <div>
                 <%- include('./../listings/listing', {listing}) %>
               </div>
               <% } %>
@@ -156,7 +156,7 @@
             <div class="card-body">
               <% if (userReviews.length) { %>
               <% for(let {_id, rating, body, userFrom} of userReviews) { %>
-              <div class="row px-5" id="<%= _id %>">
+              <div class="row p-0" id="<%= _id %>">
                 <div class="card mb-3 rounded-0 border border-secondary-subtle bg-subtle text-start">
                   <div class="grid card-body">
                     <div class="row">

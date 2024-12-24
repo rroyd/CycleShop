@@ -4,4 +4,67 @@
     <p>Customize your profile</p>
   </div>
 
+  <div class="container w-auto grid card my-4">
+    <div class="card p-0 border border-secondary-subtle bg-body-tertiary text-start">
+      <div class="card-header row gap-2 align-items-center noti bg-white m-0 p-3" data-bs-toggle="collapse" href="#editProfile" role="button" aria-expanded="false" aria-controls="editProfile">
+        <div class="col">
+          <h4 class="bold d-inline-block card-title text-success m-0a">Profile</h4>
+          <div class="mx-2 vr"></div>
+        </div>
+        <div class="col-1 m-0 p-2 rounded-1 d-inline-block justify-self-end bg-success text-light text-end w-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+          </svg></div>
+      </div>
+
+      <section id="editProfile" class="bg bg-secondary bg-body-tertiary p-5">
+        <div class="grid container row">
+          <form action="/users/<%= userLogged._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+            <div class="row col">
+              <p class="d-inline-block col">
+                Profile Picture:
+              </p>
+              <div class="d-flex flex-column align-items-center col mb-3">
+                <img src="<%= (!userLogged.profilePic) ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" : userLogged.profilePic %>" class="m-3" id="file" style="width: 200px; height: 200px;" alt="">
+                <input class="form-control btn btn-success" class="d-block" name="profilePicture" type="file" id="profilePicture">
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group mb-3">
+                <label class="d-inline-block col"> Biography: </label>
+                <textarea name="user[biography]" class="form-control" rows="5" id=""><%= userLogged.biography %></textarea>
+              </div>
+
+              <div class="input-group mb-3">
+                <label class="d-inline-block col"> Location: </label>
+                <input type="text" name="user[location]" class="form-control" value="<%= userLogged.geography %>"></input>
+              </div>
+
+              <div class="input-group mb-3">
+                <label class="d-inline-block col"> Phone Number: </label>
+                <input type="text" value="<%= userLogged.phone %>" name="user[phone]" class="form-control"></input>
+              </div>
+
+              <div class="input-group mb-3">
+                <label class="d-inline-block col"> Show map on profile: </label>
+                <select name="showMap" class="form-control">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <section class="d-flex justify-content-end gap-2">
+          <a href="/users/<%= userLogged._id %>/manage?p=editProfile" class="btn btn-outline-dark w-25">Discard</a>
+          <button type="submit" class="btn btn-success w-25">Save</button>
+        </section>
+        </form>
+
+      </section>
+
+    </div>
+  </div>
+  </div>
+
 </section>
+
+<script src="/js/displayProfilePicture.js"></script>

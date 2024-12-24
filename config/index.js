@@ -24,10 +24,5 @@ module.exports = {
   authConfig: {
     failureRedirect: "/login",
     failureFlash: true,
-  },
-  firebaseConfig: {
-      bucketName: 'cycleshop',
-      nameSuffix: uuidv4(),
-      public: true
   }
 };

@@ -4,6 +4,8 @@ const { Listing } = require("../models/Listing");
 const { Review } = require("../models/Review");
 const { Connection } = require("../models/Connection");
 
+const {uploadImageToStorage} = require("./../firebase")
+
 
 //Show all users
 module.exports.index = async (req, res) => {
@@ -54,4 +56,29 @@ module.exports.showProfile = async (req,res) => {
   })
 
   res.render("users/profile", {user, userListings, userReviews, userFriends});
+}
+
+//Edit user profile
+module.exports.edit = async (req,res) => {
+  const currentUser = await User.findById(req.user._id);
+
+  const {biography} = req.body.user;
+  const {showMap} = req.body;
+
+  currentUser.biography = biography;
+
+  if(req.file) {
+    try{
+      const url = await uploadImageToStorage(req.file, "userProfilePicture");
+      currentUser.profilePic = url;
+
+    } catch(err){
+      req.flash("error", "Error updating profile: " + err)
+      res.redirect(`/users/${req.user._id}/manage?p=editProfile`);
+    }
+  }
+      
+  await currentUser.save();
+  req.flash("success", "Profile has been updated")
+  res.redirect(`/users/${req.user._id}/manage?p=editProfile`);
 }
