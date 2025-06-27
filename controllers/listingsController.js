@@ -27,7 +27,6 @@ module.exports.show = async (req, res) => {
   res.render("listings/show", {listings, listing, reviews});
 };
 
-
 module.exports.destroy = async (req,res) => {
   const {id} = req.params;
 
@@ -66,5 +65,27 @@ module.exports.create = async (req,res) => {
 
   req.flash("success", "Listing posted successfully!")
   res.redirect('/listings');
+}
 
+module.exports.edit = async (req,res) => {
+    const {photos} = await Listing.findById(req.params.id);
+    const updatedListing = {...req.body.listing };
+    const photosToDelete = req.body.photosToDelete;
+    const photoUrls = photos.filter(photo => !photosToDelete.includes(photo));
+
+    if (req.files) {
+    try {
+      urls = await uploadImagesToStorage(req.files, "listing")
+    } catch (err){
+      req.flash("error", "Error, can't upload listing new photos: " + err)
+      return res.redirect(`/listings/${updatedListing.id}/edit`);
+    }
+  }
+
+  photoUrls.push(...urls);
+
+  await Listing.findByIdAndUpdate(req.params.id, {...updatedListing, photos: photoUrls});
+
+  req.flash("success", "Listing updated successfully");
+  res.redirect(`/listings/${updatedListing.id}`);
 }

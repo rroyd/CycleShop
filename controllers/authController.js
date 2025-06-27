@@ -51,6 +51,7 @@ module.exports.isAuthorized = (req, res, next) => {
   if (req.user) {
     return next();
   }
+  
   req.flash("info", "You must be signed in to continue");
   res.redirect("/login");
 };

@@ -19,8 +19,10 @@ module.exports.show = async (req, res) => {
   const { id } = req.params;
 
   const user = await User.findById(id);
+  const userListings = await Listing.find({seller: id});
+  const userReviews = await Review.find({userTo: id});
 
-  res.render("users/show", { user });
+  res.render("users/profile", { user, userListings, userReviews });
 };
 
 //Manage user logged page
